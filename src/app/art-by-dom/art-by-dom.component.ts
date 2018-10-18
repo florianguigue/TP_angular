@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Article } from '../models/article';
 
 @Component({
   selector: 'app-art-by-dom',
@@ -9,17 +10,24 @@ import { Router } from '@angular/router';
 export class ArtByDomComponent implements OnInit {
 
   public title: String;
-  public domain_id: number;
+  public domaine_id: number;
+  public articles: Article[];
   @Input() public error: String;
+  @Output() onChoose = new EventEmitter();
   constructor(public router: Router) { }
 
   ngOnInit() {
     this.title = 'Rechercher un article par Domaine';
   }
 
-  domainSelected(domain_id: number): void {
-    this.domain_id = domain_id;
-    this.router.navigate(['/search/' + domain_id]);
+  domaineSelected(domaine_id: number): void {
+    this.domaine_id = domaine_id;
+    this.router.navigate(['/search/' + domaine_id]);
+  }
+
+  onChange( value: string) {
+    this.domaine_id = +value;
+    this.onChoose.emit(this.domaine_id);
   }
 
 }

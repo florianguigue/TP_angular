@@ -3,12 +3,11 @@
 
   <form class="form-horizontal" role="form" name="empByDepForm">
     <div class="form-group">
-      <app-domain [idDomaine]="idDomaine" (onChoose)="depSelected($event)"></app-domain>
+      <app-domain [idDomaine]="domaine_id" (onChoose)="domaineSelected($event)"></app-domain>
     </div>
   </form>
-  <!-- <div *ngIf="department_id > 0">
-    <p>test</p>
-    <app-emp-list [employees]="employees" ></app-emp-list>
-  </div> -->
+  <div *ngIf="domaine_id > 0">
+    <app-articles></app-articles>
+  </div>
   <app-error [error]="error"></app-error>
 </div>

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Domain } from 'domain';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
 
-  private netArticlesUrl = 'http://134.214.118.45:8080/NetArticlesRest/webresources/webservice/';
+  private netArticlesUrl = 'http://134.214.118.25:8081/NetArticlesRest/webresources/webservice/';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -26,7 +27,13 @@ export class ArticleService {
     return this.httpClient.get(url);
   }
 
-  public searchArticle() {
+  public getArticles() {
+    const url: string = this.netArticlesUrl + 'articles';
+    return this.httpClient.get(url);
+  }
 
+  public getArticleByDomaine(id_domaine: number) {
+    const url: string = this.netArticlesUrl + 'article/domaine/' + id_domaine;
+    return this.httpClient.get(url);
   }
 }

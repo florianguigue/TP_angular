@@ -1,9 +1,9 @@
 export class Article {
-  private id_article: number;
-  private id_domaine: number;
-  private titre: string;
-  private resume: string;
-  private prix: number;
-  private date_article: string;
-  private fichier: string;
+  public id_article: number;
+  public id_domaine: number;
+  public titre: string;
+  public resume: string;
+  public prix: number;
+  public date_article: string;
+  public fichier: string;
 }

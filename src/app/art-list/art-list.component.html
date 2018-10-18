@@ -1,0 +1,28 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Domaine</th>
+      <th>Titre</th>
+      <th>Resume</th>
+      <th>Prix</th>
+      <th>Date</th>
+      <th>Fichier</th>
+      <th>Modifier</th>
+      <th>Supprimer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let article of articles'>
+      <td>{{ article.idArticle }}</td>
+      <td>{{ article.domaine.idDomaine }}</td>
+      <td>{{ article.titre }}</td>
+      <td>{{ article.resume }}</td>
+      <td>{{ article.prix }}</td>
+      <td>{{ article.dateArticle  | date: 'shortDate' }}</td>
+      <td>{{ article.fichier }}</td>
+      <td><button class="btn btn-primary">Modifier</button></td>
+      <td><button class="btn btn-primary">Supprimer</button></td>
+    </tr>
+  </tbody>
+</table>

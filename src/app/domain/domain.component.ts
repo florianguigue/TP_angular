@@ -1,7 +1,5 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { Domaine } from '../models/domaine';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ArticleService } from '../services/article.service';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-domain',
@@ -10,8 +8,8 @@ import { EventEmitter } from 'events';
 })
 export class DomainComponent implements OnInit {
   @Input() public idDomaine: number;
-  //@Output() onChoose = new EventEmitter();
-  public domaines: Domaine[];
+  @Output() onChoose = new EventEmitter();
+  public domaines: any;
   public error: String;
 
   constructor( public articleService: ArticleService ) { }
@@ -27,8 +25,8 @@ export class DomainComponent implements OnInit {
     );
   }
 
-  /*onChange( value: string) {
-    this.idDomain = +value;
-    this.onChoose.emit(this.idDomain);
-  }*/
+  onChange( value: string) {
+    this.idDomaine = +value;
+    this.onChoose.emit(this.idDomaine);
+  }
 }
