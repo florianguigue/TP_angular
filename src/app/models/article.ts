@@ -1,9 +1,11 @@
+import {Domaine} from './domaine';
+
 export class Article {
-  private id_article: number;
-  private id_domaine: number;
+  private idArticle: number;
+  private domaine: Domaine;
   private titre: string;
   private resume: string;
   private prix: number;
-  private date_article: string;
+  private dateArticle: string;
   private fichier: string;
 }

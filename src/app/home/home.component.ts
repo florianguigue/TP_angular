@@ -14,6 +14,13 @@ export class HomeComponent implements OnInit {
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
+    this.articleService.getLastArticle().subscribe(
+      (article) => {
+        this.article = article;
+      }, (error) => {
+
+      }
+    );
   }
 
 }

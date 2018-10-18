@@ -1,7 +1,7 @@
 export class Auteur {
-  private id_auteur: number;
-  private identite_auteur: string;
-  private adresse_auteur: string;
-  private login_auteur: string;
-  private pwd_auteur: string;
+  private idAuteur: number;
+  private identiteAuteur: string;
+  private adresseAuteur: string;
+  private loginAuteur: string;
+  private pwdAuteur: string;
 }
