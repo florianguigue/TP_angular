@@ -24,4 +24,13 @@ export class ArticleService {
   public searchArticle() {
 
   }
+
+  public getLastArticle(): Observable<any> {
+    const url: string = this.netArticlesUrl + 'article/last/';
+    return this.httpClient.get(url);
+  }
+
+  public searchArticle() {
+
+  }
 }
