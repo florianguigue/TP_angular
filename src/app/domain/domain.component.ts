@@ -9,9 +9,9 @@ import { EventEmitter } from 'events';
   styleUrls: ['./domain.component.css']
 })
 export class DomainComponent implements OnInit {
-  @Input() public idDomain: number;
+  @Input() public idDomaine: number;
   //@Output() onChoose = new EventEmitter();
-  public domains: Domaine[];
+  public domaines: Domaine[];
   public error: String;
 
   constructor( public articleService: ArticleService ) { }

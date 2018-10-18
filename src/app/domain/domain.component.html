@@ -1,9 +1,9 @@
 <div class="form-group">
   <label class="col-sm-3 col-md-2 control-label">domaine : </label>
   <div class="col-sm-6 col-md-3">
-    <select class='form-control' name='domaines' [(ngModel)]="iddomaine">
+    <select class='form-control' name='domaines' [(ngModel)]="idDomaine">
           <option value='undefined' selected>Sélectionner un domaine</option>
-          <option *ngFor="let domaine of domaines" [value]="domaine.iddomaine">{{ domaine.libdomaine }}</option>
+          <option *ngFor="let domaine of domaines" [value]="domaine.idDomaine">{{ domaine.libdomaine }}</option>
     </select>
   </div>
 </div>
