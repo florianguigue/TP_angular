@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loginService.getUser(this.userlogin).subscribe(
       (user) => {
-        if (this.userpwd === user.userpwd) {
+        if (this.userpwd === user.pwdClient) {
           this.sharedService.isConnected = true;
           this.router.navigate(['/home']);
         } else {

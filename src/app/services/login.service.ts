@@ -11,7 +11,7 @@ export class LoginService {
   constructor(private httpClient: HttpClient) { }
 
   public getUser(login: string): Observable<any> {
-    const url: string = this.netArticlesUrl + 'getUser';
-    return this.httpClient.post(url, JSON.stringify(login));
+    const url: string = this.netArticlesUrl + 'connecter/' + login;
+    return this.httpClient.get(url);
   }
 }
