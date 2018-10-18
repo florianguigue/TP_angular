@@ -12,6 +12,8 @@ import { ArticleComponent } from './article/article.component';
 import { LoginComponent } from './login/login.component';
 import {LoginService} from './services/login.service';
 import { ErrorComponent } from './error/error.component';
+import { ArtByDomComponent } from './art-by-dom/art-by-dom.component';
+import { DomainComponent } from './domain/domain.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ErrorComponent } from './error/error.component';
     HomeComponent,
     ArticleComponent,
     LoginComponent,
-    ErrorComponent
+    ErrorComponent,
+    ArtByDomComponent,
+    DomainComponent
   ],
   imports: [
     BrowserModule,

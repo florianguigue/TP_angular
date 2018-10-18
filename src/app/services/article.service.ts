@@ -15,4 +15,13 @@ export class ArticleService {
     const url: string = this.netArticlesUrl + 'article/' + id;
     return this.httpClient.get(url);
   }
+
+  public getDomains() {
+    const url: string = this.netArticlesUrl + 'domaines';
+    return this.httpClient.get(url);
+  }
+
+  public searchArticle() {
+
+  }
 }
