@@ -16,13 +16,9 @@ export class ArticleService {
     return this.httpClient.get(url);
   }
 
-  public getDomains() {
+  public getDomaines() {
     const url: string = this.netArticlesUrl + 'domaines';
     return this.httpClient.get(url);
-  }
-
-  public searchArticle() {
-
   }
 
   public getLastArticle(): Observable<any> {

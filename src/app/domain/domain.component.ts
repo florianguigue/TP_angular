@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { Domain } from '../models/domain';
+import { Domaine } from '../models/domaine';
 import { ArticleService } from '../services/article.service';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-domain',
@@ -9,8 +10,8 @@ import { ArticleService } from '../services/article.service';
 })
 export class DomainComponent implements OnInit {
   @Input() public idDomain: number;
-  @Output() onChoose = new EventEmitter();
-  public domaines: Domain[];
+  //@Output() onChoose = new EventEmitter();
+  public domains: Domaine[];
   public error: String;
 
   constructor( public articleService: ArticleService ) { }
@@ -20,14 +21,14 @@ export class DomainComponent implements OnInit {
   }
 
   getDomains() {
-    this.articleService.getDomains().subscribe(
+    this.articleService.getDomaines().subscribe(
       (domaines) => { this.domaines = domaines; },
       (error) => { this.error = error.message; }
     );
   }
 
-  onChange( value: string) {
+  /*onChange( value: string) {
     this.idDomain = +value;
     this.onChoose.emit(this.idDomain);
-  }
+  }*/
 }

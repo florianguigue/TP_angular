@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbar-collapse-target">
       <ul class="nav navbar-nav">
         <li class="active"><a [routerLink]="['/home']">Accueil</a></li>
-        <li><a [routerLink]="['/recherche']">Rechercher</a></li>
+        <li><a [routerLink]="['/search']">Rechercher</a></li>
         <div *ngIf="sharedService.isConnected">
           <li><a [routerLink]="['/myArticles']">Mes articles</a></li>
           <li><a [routerLink]="['/account']">Compte</a></li>

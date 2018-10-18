@@ -1,14 +1,14 @@
-<select>
-  <option *ngFor="let item of list"></option>
-</select>
-
 <div class="container">
-  <h3 class="col-md-offset-2"> </h3>
+  <h2 class="col-md-offset-2">{{ title }}</h2>
 
-  <form class="form-horizontal" role="form" name="empByJobForm">
+  <form class="form-horizontal" role="form" name="empByDepForm">
     <div class="form-group">
-      <!-- <app-article [article_id]="article_id" (onChoose)="jobSelected($event)" ></app-article> -->
+      <app-domain [idDomain]="idDomain" (onChoose)="depSelected($event)"></app-domain>
     </div>
-    <app-error [error]="error"></app-error>
   </form>
+  <!-- <div *ngIf="department_id > 0">
+    <p>test</p>
+    <app-emp-list [employees]="employees" ></app-emp-list>
+  </div> -->
+  <app-error [error]="error"></app-error>
 </div>

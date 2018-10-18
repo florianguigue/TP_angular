@@ -14,11 +14,12 @@ export class ArtByDomComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
+    this.title = 'Rechercher un article par Domaine';
   }
 
   domainSelected(domain_id: number): void {
     this.domain_id = domain_id;
-    this.router.navigate(['/articles/search/' + domain_id]);
+    this.router.navigate(['/search/' + domain_id]);
   }
 
 }
