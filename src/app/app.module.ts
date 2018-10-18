@@ -14,7 +14,6 @@ import {LoginService} from './services/login.service';
 import { ErrorComponent } from './error/error.component';
 import { ArtByDomComponent } from './art-by-dom/art-by-dom.component';
 import { DomainComponent } from './domain/domain.component';
-import { ArticlesComponent } from './articles/articles.component';
 import { ArtListComponent } from './art-list/art-list.component';
 
 @NgModule({
@@ -27,7 +26,6 @@ import { ArtListComponent } from './art-list/art-list.component';
     ErrorComponent,
     ArtByDomComponent,
     DomainComponent,
-    ArticlesComponent,
     ArtListComponent
   ],
   imports: [
