@@ -1,5 +1,5 @@
 export class Achete {
-  private idClient: number;
-  private idArticle: number;
-  private dateAchat: string;
+  public idClient: number;
+  public idArticle: number;
+  public dateAchat: string;
 }

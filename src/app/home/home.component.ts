@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit {
 
   public article: Article;
 
+  public error: string;
+
   constructor(private articleService: ArticleService) { }
 
   ngOnInit() {
@@ -18,7 +20,7 @@ export class HomeComponent implements OnInit {
       (article) => {
         this.article = article;
       }, (error) => {
-
+        this.error = error.message;
       }
     );
   }

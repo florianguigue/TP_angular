@@ -1,4 +1,4 @@
 export class Domaine {
-  private idDomaine: number;
-  private libdomaine: string;
+  public idDomaine: number;
+  public libdomaine: string;
 }

@@ -1,11 +1,11 @@
 import {Categorie} from './categorie';
 
 export class Client {
-  private idClient: number;
-  private categorie: Categorie;
-  private identiteClient: string;
-  private adresseClient: string;
-  private credits: number;
-  private loginClient: string;
-  private pwdClient: string;
+  public idClient: number;
+  public categorie: Categorie;
+  public identiteClient: string;
+  public adresseClient: string;
+  public credits: number;
+  public loginClient: string;
+  public pwdClient: string;
 }
