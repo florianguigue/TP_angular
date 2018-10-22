@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * SharedService permet de partager des données entre tous les composants, tels que l'URL précédente, la connexion du client ou le panier.
+ */
 @Injectable({
   providedIn: 'root'
 })

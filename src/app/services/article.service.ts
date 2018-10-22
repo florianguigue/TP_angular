@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ArticleService {
 
-  private netArticlesUrl = 'http://134.214.118.25:8081/NetArticlesRest/webresources/webservice/';
+  private netArticlesUrl = 'http://localhost:8081/NetArticlesRest/webresources/webservice/';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  private netArticlesUrl = 'http://localhost/EmployeesSrv/';
+  private netArticlesUrl = 'http://localhost:8081/NetArticlesRest/webresources/webservice/';
 
   constructor(private httpClient: HttpClient) { }
 
