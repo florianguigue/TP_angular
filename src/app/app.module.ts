@@ -15,6 +15,7 @@ import { ErrorComponent } from './error/error.component';
 import { ArtByDomComponent } from './art-by-dom/art-by-dom.component';
 import { DomainComponent } from './domain/domain.component';
 import { ArtListComponent } from './art-list/art-list.component';
+import { DetailArticleComponent } from './detail-article/detail-article.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ArtListComponent } from './art-list/art-list.component';
     ErrorComponent,
     ArtByDomComponent,
     DomainComponent,
-    ArtListComponent
+    ArtListComponent,
+    DetailArticleComponent
   ],
   imports: [
     BrowserModule,

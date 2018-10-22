@@ -26,13 +26,15 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
     this.idArticle = +this.activatedRoute.snapshot.paramMap.get('idArticle');
-    this.articleService.getArticle(this.idArticle).subscribe(
-      (article) => {
-        this.article = article;
-      }, (error) => {
-        this.error = error.message;
-      }
-    );
+    if (this.idArticle !== 0) {
+      this.articleService.getArticle(this.idArticle).subscribe(
+        (article) => {
+          this.article = article;
+        }, (error) => {
+          this.error = error.message;
+        }
+      );
+    }
   }
 
 }

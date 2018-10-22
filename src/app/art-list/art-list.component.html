@@ -2,27 +2,19 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>Domaine</th>
       <th>Titre</th>
-      <th>Resume</th>
       <th>Prix</th>
-      <th>Date</th>
-      <th>Fichier</th>
-      <th>Modifier</th>
-      <th>Supprimer</th>
+      <th>Résumé</th>
+      <th>Panier</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor='let article of articles'>
       <td>{{ article.idArticle }}</td>
-      <td>{{ article.domaine.idDomaine }}</td>
       <td>{{ article.titre }}</td>
-      <td>{{ article.resume }}</td>
-      <td>{{ article.prix }}</td>
-      <td>{{ article.dateArticle  | date: 'shortDate' }}</td>
-      <td>{{ article.fichier }}</td>
-      <td><button class="btn btn-primary">Modifier</button></td>
-      <td><button class="btn btn-primary">Supprimer</button></td>
+      <td>{{ article.prix | currency: 'EUR'}}</td>
+      <td><a class="btn btn-primary" [routerLink]="['/article', article.idArticle]">Résumé</a></td>
+      <td><button class="btn btn-primary">Panier</button></td>
     </tr>
   </tbody>
 </table>

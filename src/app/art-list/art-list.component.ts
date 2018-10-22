@@ -16,9 +16,4 @@ export class ArtListComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  detail(article_id: number) {
-    this.router.navigate(['/article/' + article_id]);
-  }
-
 }
