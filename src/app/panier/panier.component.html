@@ -1,0 +1,35 @@
+<div class="col-md-9 col-md-offset-2">
+  <h1 align='center'>{{titre}}</h1>
+  <div> <!-- Panier non vide et non null -->
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <td>Id</td>
+        <td>Titre</td>
+        <td>Prix</td>
+        <td>Supprimer</td>
+      </tr>
+      </thead>
+      <tbody> <!-- Pour chaque article du panier -->
+      <tr *ngFor='let article of sharedService.getPanier()'>
+        <td>{{article.idArticle}}</td>
+        <td>{{article.titre}}</td>
+        <td>{{article.prix | currency: 'EUR'}}</td>
+        <td><a (click)="deleteArticle(article.idArticle)">Supprimer</a></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: right">Montant total</td>
+        <td>{{montantTotal | currency: 'EUR'}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+    <div>
+      <button class="btn btn-default btn-primary" (click)="acheter()" [disabled]="sharedService.getPanier().length < 1"><span class="glyphicon glyphicon-log-in"></span>
+        Valider panier
+      </button>
+    </div>
+
+    <app-error [error]="error"></app-error>
+  </div>
+</div>

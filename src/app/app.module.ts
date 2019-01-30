@@ -16,6 +16,16 @@ import { ArtByDomComponent } from './art-by-dom/art-by-dom.component';
 import { DomainComponent } from './domain/domain.component';
 import { ArtListComponent } from './art-list/art-list.component';
 import { DetailArticleComponent } from './detail-article/detail-article.component';
+import { AccountComponent } from './account/account.component';
+import { ClientComponent } from './client/client.component';
+import {ArticleService} from './services/article.service';
+import { PanierComponent } from './panier/panier.component';
+import { AchatsComponent } from './achats/achats.component';
+import { OeuvresAuteurComponent } from './oeuvres-auteur/oeuvres-auteur.component';
+import { VentesComponent } from './ventes/ventes.component';
+import { AjoutOeuvreComponent } from './ajout-oeuvre/ajout-oeuvre.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -28,15 +38,23 @@ import { DetailArticleComponent } from './detail-article/detail-article.componen
     ArtByDomComponent,
     DomainComponent,
     ArtListComponent,
-    DetailArticleComponent
+    DetailArticleComponent,
+    AccountComponent,
+    ClientComponent,
+    PanierComponent,
+    AchatsComponent,
+    OeuvresAuteurComponent,
+    VentesComponent,
+    AjoutOeuvreComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FileUploadModule
   ],
-  providers: [SharedService, LoginService],
+  providers: [SharedService, LoginService, ArticleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

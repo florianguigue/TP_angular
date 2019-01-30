@@ -37,4 +37,20 @@ export class ArticleComponent implements OnInit {
     }
   }
 
+  isHomePage(): boolean {
+    return this.router.url === '/home' || this.router.url === '';
+  }
+
+  addToBasket(article: Article): void {
+    if (this.sharedService.addToBasket(article)) {
+      this.router.navigate(['/panier']);
+    } else {
+      this.error = 'Article déjà présent dans le panier';
+    }
+  }
+
+  cancel() {
+    this.router.navigate([this.sharedService.getOriginalUrl()]);
+  }
+
 }

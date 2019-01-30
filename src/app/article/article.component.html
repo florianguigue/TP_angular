@@ -24,4 +24,9 @@
     <div class="col-md-9">{{article.domaine.libdomaine}}</div>
   </div>
 </div>
+
+<a *ngIf="sharedService.getTypeCompte() == 1" class="btn btn-primary pull-left" (click)="addToBasket(article)"><span class="glyphicon glyphicon-log-in"></span> Acquérir cet article</a>
+<button *ngIf="!isHomePage()" class="btn btn-primary pull-right" (click)="cancel()"><span class="glyphicon glyphicon-list"></span> Retour
+  liste
+</button>
 <app-error [error]="error"></app-error>

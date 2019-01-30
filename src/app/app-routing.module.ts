@@ -4,6 +4,12 @@ import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {ArtByDomComponent} from './art-by-dom/art-by-dom.component';
 import {DetailArticleComponent} from './detail-article/detail-article.component';
+import {AccountComponent} from './account/account.component';
+import {PanierComponent} from './panier/panier.component';
+import {AchatsComponent} from './achats/achats.component';
+import {OeuvresAuteurComponent} from './oeuvres-auteur/oeuvres-auteur.component';
+import {VentesComponent} from './ventes/ventes.component';
+import {AjoutOeuvreComponent} from './ajout-oeuvre/ajout-oeuvre.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -15,6 +21,12 @@ const routes: Routes = [
       { path: ':idDomaine', component: ArtByDomComponent }
   ]},
   { path: 'article/:idArticle', component: DetailArticleComponent },
+  { path: 'account', component: AccountComponent },
+  { path: 'myArticles', component: AchatsComponent },
+  { path: 'myBooks', component: OeuvresAuteurComponent },
+  { path: 'ventes', component: VentesComponent },
+  { path: 'ajout', component: AjoutOeuvreComponent },
+  { path: 'panier', component: PanierComponent }
 ];
 
 @NgModule({
