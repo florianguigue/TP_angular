@@ -1,47 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dal;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Epulapp
- */
 @Entity
 @Table(name = "client")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
-    , @NamedQuery(name = "Client.findByIdClient", query = "SELECT c FROM Client c WHERE c.idClient = :idClient")
-    , @NamedQuery(name = "Client.findByIdentiteClient", query = "SELECT c FROM Client c WHERE c.identiteClient = :identiteClient")
-    , @NamedQuery(name = "Client.findByAdresseClient", query = "SELECT c FROM Client c WHERE c.adresseClient = :adresseClient")
-    , @NamedQuery(name = "Client.findByCredits", query = "SELECT c FROM Client c WHERE c.credits = :credits")
-    , @NamedQuery(name = "Client.findByLoginClient", query = "SELECT c FROM Client c WHERE c.loginClient = :loginClient")
-    , @NamedQuery(name = "Client.findByPwdClient", query = "SELECT c FROM Client c WHERE c.pwdClient = :pwdClient")})
+    @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
+    @NamedQuery(name = "Client.findByIdClient", query = "SELECT c FROM Client c WHERE c.idClient = :idClient"),
+    @NamedQuery(name = "Client.findByIdentiteClient", query = "SELECT c FROM Client c WHERE c.identiteClient = :identiteClient"),
+    @NamedQuery(name = "Client.findByAdresseClient", query = "SELECT c FROM Client c WHERE c.adresseClient = :adresseClient"),
+    @NamedQuery(name = "Client.findByCredits", query = "SELECT c FROM Client c WHERE c.credits = :credits"),
+    @NamedQuery(name = "Client.findByLoginClient", query = "SELECT c FROM Client c WHERE c.loginClient = :loginClient"),
+    @NamedQuery(name = "Client.findByPwdClient", query = "SELECT c FROM Client c WHERE c.pwdClient = :pwdClient")})
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @TableGenerator(name = "cleClient", table = "cles", pkColumnName = "id_cle", valueColumnName = "val_cle", pkColumnValue = "CLIENT", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "cleClient")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_client")
@@ -81,15 +64,6 @@ public class Client implements Serializable {
         this.idClient = idClient;
         this.loginClient = loginClient;
         this.pwdClient = pwdClient;
-    }
-    
-    public Client(String loginClient, String pwdClient, String identite, String adresse, int credits, Categorie categorie) {
-        this.loginClient = loginClient;
-        this.pwdClient = pwdClient;
-        this.identiteClient = identite;
-        this.adresseClient = adresse;
-        this.credits = credits;
-        this.categorie = categorie;
     }
 
     public Integer getIdClient() {
@@ -181,5 +155,5 @@ public class Client implements Serializable {
     public String toString() {
         return "dal.Client[ idClient=" + idClient + " ]";
     }
-    
+
 }

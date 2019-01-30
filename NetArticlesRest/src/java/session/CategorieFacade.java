@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import dal.Categorie;
@@ -11,25 +6,29 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author Flow
- */
+
 @Stateless
 public class CategorieFacade {
 
     @PersistenceContext(unitName = "NetArticlesRestPU")
     private EntityManager em;
-
-    public EntityManager getEm() {
-        return em;
-    }
     
-    public List<Categorie> getCategories() {
+    /**
+     * Récupère la liste des categories
+     * @return Collection de Categorie
+     * @throws Exception 
+     */
+    public List<Categorie> lister() throws Exception {
         return em.createNamedQuery("Categorie.findAll").getResultList();
     }
     
-    public Categorie getCategoryById (Integer id) {
-        return em.find(Categorie.class, id);
+    /**
+     * Lecture d'une categorie sur son Id
+     * @param idCategorie Id de la categorie à lire
+     * @return Categorie
+     * @throws Exception 
+     */
+    public Categorie lire(int idCategorie) throws Exception {
+        return em.find(Categorie.class, idCategorie);
     }
 }

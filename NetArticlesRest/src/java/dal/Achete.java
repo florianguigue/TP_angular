@@ -1,38 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dal;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Epulapp
- */
 @Entity
 @Table(name = "achete")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Achete.findAll", query = "SELECT a FROM Achete a")
-    , @NamedQuery(name = "Achete.findByIdClient", query = "SELECT a FROM Achete a WHERE a.achetePK.idClient = :idClient")
-    , @NamedQuery(name = "Achete.findByIdArticle", query = "SELECT a FROM Achete a WHERE a.achetePK.idArticle = :idArticle")
-    , @NamedQuery(name = "Achete.findByDateAchat", query = "SELECT a FROM Achete a WHERE a.dateAchat = :dateAchat")})
+    @NamedQuery(name = "Achete.findAll", query = "SELECT a FROM Achete a"),
+    @NamedQuery(name = "Achete.findByIdClient", query = "SELECT a FROM Achete a WHERE a.achetePK.idClient = :idClient"),
+    @NamedQuery(name = "Achete.findByIdArticle", query = "SELECT a FROM Achete a WHERE a.achetePK.idArticle = :idArticle"),
+    @NamedQuery(name = "Achete.findByDateAchat", query = "SELECT a FROM Achete a WHERE a.dateAchat = :dateAchat")})
 public class Achete implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AchetePK achetePK;

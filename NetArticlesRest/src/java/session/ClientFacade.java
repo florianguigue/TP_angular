@@ -1,124 +1,104 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import dal.Client;
+import java.math.BigDecimal;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Epulapp
- */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class ClientFacade {
-
-    private Client client;
-
-    @PersistenceContext(unitName = "NetArticlesRestPU")
+    
+    @PersistenceContext(unitName="NetArticlesRestPU")
     private EntityManager em;
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    protected EntityManager getEntityManager() {
-        return this.em;
-    }
-
+    
+    @EJB
+    ArticleFacade articleF;
+    
     /**
-     * Lecture du client sur son login
-     * Note : le login est unique (contrainte de bd)
-     * @param login login du client à lire
-     * @return un objet Client
-     * @throws Exception 
+     * Liste des clients
+     * @return Collection de Client
+     * @throws Exception
      */
-    public Client lireLogin(String login) throws Exception {
-        try {
-            Query requete = em.createNamedQuery("Client.findByLoginClient");
-            requete.setParameter("loginClient", login);
-            Client client = ((Client)requete.getSingleResult());
-            return client;
-        } catch (Exception e) {
-            throw e;
-        }
+    public List<Client> lister() throws Exception{
+        return em.createNamedQuery("Client.findAll").getResultList();
     }
     
     /**
-     * Renvoie le client si le login existe
-     * 
-     * @param id
+     * Lecture d'un client sur son id
+     * @param idClient identifiant du client à lire
      * @return Client
      * @throws Exception 
      */
-    public Client lireId(Integer id) throws Exception {
-        try {
-            Query requete = em.createNamedQuery("Client.findByIdClient");
-            requete.setParameter("idClient", id);
-            Client client = ((Client)requete.getSingleResult());
-            return client;
-        } catch (Exception e) {
-            throw e;
-        }
+    public Client lire(int idClient) throws Exception {
+        return em.find(Client.class, idClient);
     }
     
     /**
-     * Créer un compte client
-     * 
-     * @param client
+     * Lecteur du client sur son login
+     * @param login login du client à lire
+     * @return Client
      * @throws Exception 
      */
-    public void createAccount(Client client) throws Exception {
-        try {
-            em.persist(client);
-        } catch (Exception e) {
-            throw e;
-        }
+    public Client lireLogin(String login) throws Exception {
+        Query requete = em.createNamedQuery("Client.findByLoginClient");
+        requete.setParameter("loginClient", login);
+        return (Client)requete.getSingleResult();
     }
     
     /**
-     * Renvoie le dernier id client
-     * 
-     * @return Integer
+     * Modification d'un client
+     * @param client : Client à modifier
      * @throws Exception 
      */
-    public Integer getLastId() throws Exception {
-        try {
-            Integer lastId = 0;
-            List<Client> allCustomer = em.createNamedQuery("Client.findAll").getResultList();
-            for (Client client : allCustomer) {
-                if (client.getIdClient() > lastId) {
-                    lastId = client.getIdClient();
-                }
-            }
-            return lastId;
-        } catch (Exception e) {
-            throw e;
-        }
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void modifier(Client client) throws Exception {
+        Client c = lire(client.getIdClient());
+        c.setAdresseClient(client.getAdresseClient());
+        c.setCredits(client.getCredits());
+        c.setCategorie(client.getCategorie());
+        c.setIdentiteClient(client.getIdentiteClient());
+        c.setLoginClient(client.getLoginClient());
+        c.setPwdClient(client.getPwdClient());
+        em.merge(c);
     }
-
+    
     /**
-     * Modifie un compte client avec le nouveau client passé en paramètre
-     * 
-     * @param client
+     * Ajotu d'un client
+     * @param client : Client à ajouter
      * @throws Exception 
      */
-    public void editAccount(Client client) throws Exception{
-        try {
-            em.merge(client);
-        } catch (Exception e) {
-            throw e;
-        }
+    public void ajouter(Client client) throws Exception {
+        em.persist(client);
     }
-
+    
+    /**
+     * Suppression d'un client
+     * @param idClient : id du client à supprimer
+     * @throws Exception 
+     */
+    public void supprimer(int idClient) throws Exception {
+        Client c = lire(idClient);
+        em.remove(c);
+    }
+    
+    /**
+     * Débiter le compte d'un client
+     * @param idClient Id du Client à débiter
+     * @param montant montant à débiter du compte du Client
+     * @throws Exception 
+     */
+    public void debiterCompte(int idClient, BigDecimal montant) throws Exception {
+        Client client = lire(idClient);      
+        client.setCredits(client.getCredits() - montant.intValue());
+        em.merge(client);
+    }
 }

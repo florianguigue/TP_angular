@@ -1,40 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dal;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Epulapp
- */
 @Entity
 @Table(name = "droits")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Droits.findAll", query = "SELECT d FROM Droits d")
-    , @NamedQuery(name = "Droits.findByIdAuteur", query = "SELECT d FROM Droits d WHERE d.droitsPK.idAuteur = :idAuteur")
-    , @NamedQuery(name = "Droits.findByDateTrimestre", query = "SELECT d FROM Droits d WHERE d.droitsPK.dateTrimestre = :dateTrimestre")
-    , @NamedQuery(name = "Droits.findByEtatDroits", query = "SELECT d FROM Droits d WHERE d.etatDroits = :etatDroits")
-    , @NamedQuery(name = "Droits.findByMontantsDroits", query = "SELECT d FROM Droits d WHERE d.montantsDroits = :montantsDroits")})
+    @NamedQuery(name = "Droits.findAll", query = "SELECT d FROM Droits d"),
+    @NamedQuery(name = "Droits.findByIdAuteur", query = "SELECT d FROM Droits d WHERE d.droitsPK.idAuteur = :idAuteur"),
+    @NamedQuery(name = "Droits.findByDateTrimestre", query = "SELECT d FROM Droits d WHERE d.droitsPK.dateTrimestre = :dateTrimestre"),
+    @NamedQuery(name = "Droits.findByEtatDroits", query = "SELECT d FROM Droits d WHERE d.etatDroits = :etatDroits"),
+    @NamedQuery(name = "Droits.findByMontantsDroits", query = "SELECT d FROM Droits d WHERE d.montantsDroits = :montantsDroits")})
 public class Droits implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected DroitsPK droitsPK;

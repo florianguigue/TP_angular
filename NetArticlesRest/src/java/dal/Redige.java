@@ -1,37 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dal;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author Epulapp
- */
 @Entity
 @Table(name = "redige")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Redige.findAll", query = "SELECT r FROM Redige r")
-    , @NamedQuery(name = "Redige.findByIdArticle", query = "SELECT r FROM Redige r WHERE r.redigePK.idArticle = :idArticle")
-    , @NamedQuery(name = "Redige.findByIdAuteur", query = "SELECT r FROM Redige r WHERE r.redigePK.idAuteur = :idAuteur")
-    , @NamedQuery(name = "Redige.findByPart", query = "SELECT r FROM Redige r WHERE r.part = :part")})
+    @NamedQuery(name = "Redige.findAll", query = "SELECT r FROM Redige r"),
+    @NamedQuery(name = "Redige.findByIdArticle", query = "SELECT r FROM Redige r WHERE r.redigePK.idArticle = :idArticle"),
+    @NamedQuery(name = "Redige.findByIdAuteur", query = "SELECT r FROM Redige r WHERE r.redigePK.idAuteur = :idAuteur"),
+    @NamedQuery(name = "Redige.findByPart", query = "SELECT r FROM Redige r WHERE r.part = :part")})
 public class Redige implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected RedigePK redigePK;

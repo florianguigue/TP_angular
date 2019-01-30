@@ -1,52 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dal;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Epulapp
- */
 @Entity
 @Table(name = "article")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a")
-    , @NamedQuery(name = "Article.findByIdArticle", query = "SELECT a FROM Article a WHERE a.idArticle = :idArticle")
-    , @NamedQuery(name = "Article.findByTitre", query = "SELECT a FROM Article a WHERE a.titre = :titre")
-    , @NamedQuery(name = "Article.findByResume", query = "SELECT a FROM Article a WHERE a.resume = :resume")
-    , @NamedQuery(name = "Article.findByPrix", query = "SELECT a FROM Article a WHERE a.prix = :prix")
-    , @NamedQuery(name = "Article.findByDateArticle", query = "SELECT a FROM Article a WHERE a.dateArticle = :dateArticle")
-    , @NamedQuery(name = "Article.findByFichier", query = "SELECT a FROM Article a WHERE a.fichier = :fichier")
-    , @NamedQuery(name = "Article.findByDomaine", query = "SELECT a FROM Article a WHERE a.domaine = :domaine")})
+    @NamedQuery(name = "Article.findAll", query = "SELECT a FROM Article a"),
+    @NamedQuery(name = "Article.findByIdArticle", query = "SELECT a FROM Article a WHERE a.idArticle = :idArticle"),
+    @NamedQuery(name = "Article.findByTitre", query = "SELECT a FROM Article a WHERE a.titre = :titre"),
+    @NamedQuery(name = "Article.findByResume", query = "SELECT a FROM Article a WHERE a.resume = :resume"),
+    @NamedQuery(name = "Article.findByPrix", query = "SELECT a FROM Article a WHERE a.prix = :prix"),
+    @NamedQuery(name = "Article.findByDateArticle", query = "SELECT a FROM Article a WHERE a.dateArticle = :dateArticle"),
+    @NamedQuery(name = "Article.findLatest", query = "SELECT a FROM Article a WHERE a.dateArticle = (SELECT MAX(a.dateArticle) FROM Article a)"),
+    @NamedQuery(name = "Article.findByDomaine", query = "SELECT a FROM Article a WHERE a.domaine.idDomaine = :idDomaine"),
+    @NamedQuery(name = "Article.findByFichier", query = "SELECT a FROM Article a WHERE a.fichier = :fichier")})
 public class Article implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
+    @TableGenerator(name="cleArticle", table="cles", pkColumnName="id_cle", valueColumnName = "val_cle", pkColumnValue = "ARTICLE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "cleArticle")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_article")
@@ -186,5 +167,5 @@ public class Article implements Serializable {
     public String toString() {
         return "dal.Article[ idArticle=" + idArticle + " ]";
     }
-
+    
 }

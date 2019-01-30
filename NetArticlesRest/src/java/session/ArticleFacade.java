@@ -1,89 +1,69 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import dal.Article;
-import dal.Domaine;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Epulapp
- */
 @Stateless
 public class ArticleFacade {
+    @PersistenceContext(unitName="NetArticlesRestPU")
+    private EntityManager em;
     
-    @PersistenceContext(unitName = "NetArticlesRestPU")
-    private EntityManager em;   
-
-    public EntityManager getEm() {
-        return em;
+    /**
+     * Liste des articles
+     * @return Collection de Article
+     * @throws Exception
+     */
+    public List<Article> lister() throws Exception{
+        return em.createNamedQuery("Article.findAll").getResultList();
     }
     
     /**
-     * Renvoie les articles possédant ce domaine
-     * 
-     * @param field
-     * @return
+     * Lecture d'un client sur son id
+     * @param id identifiant du client à lire
+     * @return Client
      * @throws Exception 
      */
-    public List<Article> getArticlesByField(int field) throws Exception {
-        try {
-            Query requeteArticle = em.createNamedQuery("Article.findByDomaine");
-            Query requeteDomaine = em.createNamedQuery("Domaine.findByIdDomaine");
-            requeteDomaine.setParameter("idDomaine", field);
-            requeteArticle.setParameter("domaine", (Domaine) requeteDomaine.getSingleResult());
-            return requeteArticle.getResultList();
-        } catch (Exception e) {
-            throw e;
-        }
+    public Article lire(int id) throws Exception {
+        return em.find(Article.class, id);
     }
     
     /**
-     * Renvoie l'article
-     * 
-     * @param id
-     * @return
-     * @throws Exception 
-     */
-    public Article getArticleById(int id) throws Exception {
-        try {
-            Query requete = em.createNamedQuery("Article.findByIdArticle");
-            requete.setParameter("idArticle", id);
-            return (Article) requete.getSingleResult();
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    /**
-     * Renvoie le dernier article créer
-     * 
+     * Récupère le dernier aricle paru
      * @return Article
      * @throws Exception 
      */
-    public Article getLastArticle() throws Exception {
-        try {
-            Date date = new Date(0);
-            List<Article> articles = em.createNamedQuery("Article.findAll").getResultList();
-            Article lastArticle = new Article();
-            lastArticle.setDateArticle(date);
-            for (Article article : articles) {
-                if(article.getDateArticle().after(lastArticle.getDateArticle())){
-                    lastArticle = article;
-                }
-            }
-            return lastArticle;
-        } catch (Exception e) {
-            throw e;
-        }
+    public Article getLatest() throws Exception {
+        return (Article)em.createNamedQuery("Article.findLatest").getSingleResult();
+    }
+    
+    /**
+     * Récupère la liste des article d'un domaine
+     * @param id_domaine id du domaine
+     * @return Collection de Article
+     * @throws Exception 
+     */
+    public List<Article> listerByDomaine(int id_domaine) throws Exception {
+        Query q = em.createNamedQuery("Article.findByDomaine");
+        q.setParameter("idDomaine", id_domaine);
+        return q.getResultList();
+    }
+
+    public Article addArticle(Article article) {
+        article.setDateArticle(new Date(Calendar.getInstance().getTime().getTime()));
+        em.persist(article);
+        em.flush();
+        return article;
+    }
+
+    public Article getArticleById(int idArticle) {
+        Query q = em.createNamedQuery("Article.findByIdArticle");
+        q.setParameter("idArticle", idArticle);
+        return (Article) q.getSingleResult();
     }
 }

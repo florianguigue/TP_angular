@@ -1,41 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dal;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Epulapp
- */
 @Entity
 @Table(name = "categorie")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Categorie.findAll", query = "SELECT c FROM Categorie c")
-    , @NamedQuery(name = "Categorie.findByIdCategorie", query = "SELECT c FROM Categorie c WHERE c.idCategorie = :idCategorie")
-    , @NamedQuery(name = "Categorie.findByLibcategorie", query = "SELECT c FROM Categorie c WHERE c.libcategorie = :libcategorie")})
+    @NamedQuery(name = "Categorie.findAll", query = "SELECT c FROM Categorie c"),
+    @NamedQuery(name = "Categorie.findByIdCategorie", query = "SELECT c FROM Categorie c WHERE c.idCategorie = :idCategorie"),
+    @NamedQuery(name = "Categorie.findByLibcategorie", query = "SELECT c FROM Categorie c WHERE c.libcategorie = :libcategorie")})
 public class Categorie implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @TableGenerator(name = "cleCategorie", table = "cles", pkColumnName = "id_cle", valueColumnName = "val_cle", pkColumnValue = "CATEGORIE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "cleCategorie")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_categorie")
@@ -102,5 +87,5 @@ public class Categorie implements Serializable {
     public String toString() {
         return "dal.Categorie[ idCategorie=" + idCategorie + " ]";
     }
-    
+
 }

@@ -1,83 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import dal.Achete;
 import java.util.Date;
-import java.util.Calendar;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author Flow
- */
 @Stateless
 public class AcheteFacade {
-
-    @PersistenceContext(unitName = "NetArticlesRestPU")
+    
+    @EJB
+    ClientFacade clientF;
+    
+    @EJB
+    ArticleFacade articleF;
+    
+    @PersistenceContext(unitName="NetArticlesRestPU")
     private EntityManager em;
-
-    public EntityManager getEm() {
-        return em;
-    }
-
+    
     /**
-     * Renvoie la liste des achats d'un client
-     * 
-     * @param idClient
-     * @return
+     * Lister tous les achats relatifs à un client
+     * @param idClient identifiant du client dont on souhaite récupérer les achats
+     * @return Liste d'Achete
      * @throws Exception 
      */
-    public List<Achete> getListAcheteByIdClient(Integer idClient) throws Exception {
-        try {
-            Query requete = em.createNamedQuery("Achete.findByIdClient");
-            requete.setParameter("idClient", idClient);
-            return requete.getResultList();
-        } catch (Exception e) {
-            throw e;
+    public List<Achete> listerByClient(int idClient) throws Exception {
+        Query q = em.createNamedQuery("Achete.findByIdClient");
+        q.setParameter("idClient", idClient);
+        List<Achete> achats = q.getResultList();
+        for(Achete a : achats) {
+            em.refresh(a);
         }
-    }
-
-    /**
-     * Renvoie la list de tous les achats
-     * 
-     * @return
-     * @throws Exception 
-     */
-    public List<Achete> getAllAchete() throws Exception{
-        try {
-            Query requete = em.createNamedQuery("Achete.findAll");
-            return requete.getResultList();
-        } catch (Exception e) {
-            throw e;
-        }
+        return achats;
     }
     
     /**
-     * Valide le panier si c'est possible
-     * 
-     * @param achat
-     * @return String
+     * Record a purchase coming from a client
+     * @param a Achete
+     * @throws Exception 
      */
-    public String validerPanier(Achete achat) {
-        String message = "";
-        try {
-            Calendar c = Calendar.getInstance();
-            achat.setDateAchat(new Date(c.getTimeInMillis()));
-            em.persist(achat);
-            message = "0Panier validé";
-        } catch (Exception e) {
-            message = "1Panier non validé";
-            throw e;
-        } finally {
-            return message;
-        }
-    }
+    public void effectuerAchat(int idClient, int idArticle, Date dateAchat) throws Exception {      
+        Achete ach = new Achete(idClient, idArticle);       
+        ach.setDateAchat(dateAchat);
+        em.persist(ach);
+    }    
 }

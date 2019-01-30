@@ -1,45 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dal;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Epulapp
- */
 @Entity
 @Table(name = "auteur")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Auteur.findAll", query = "SELECT a FROM Auteur a")
-    , @NamedQuery(name = "Auteur.findByIdAuteur", query = "SELECT a FROM Auteur a WHERE a.idAuteur = :idAuteur")
-    , @NamedQuery(name = "Auteur.findByIdentiteAuteur", query = "SELECT a FROM Auteur a WHERE a.identiteAuteur = :identiteAuteur")
-    , @NamedQuery(name = "Auteur.findByAdresseAuteur", query = "SELECT a FROM Auteur a WHERE a.adresseAuteur = :adresseAuteur")
-    , @NamedQuery(name = "Auteur.findByLoginAuteur", query = "SELECT a FROM Auteur a WHERE a.loginAuteur = :loginAuteur")
-    , @NamedQuery(name = "Auteur.findByPwdAuteur", query = "SELECT a FROM Auteur a WHERE a.pwdAuteur = :pwdAuteur")})
+    @NamedQuery(name = "Auteur.findAll", query = "SELECT a FROM Auteur a"),
+    @NamedQuery(name = "Auteur.findByIdAuteur", query = "SELECT a FROM Auteur a WHERE a.idAuteur = :idAuteur"),
+    @NamedQuery(name = "Auteur.findByIdentiteAuteur", query = "SELECT a FROM Auteur a WHERE a.identiteAuteur = :identiteAuteur"),
+    @NamedQuery(name = "Auteur.findByAdresseAuteur", query = "SELECT a FROM Auteur a WHERE a.adresseAuteur = :adresseAuteur"),
+    @NamedQuery(name = "Auteur.findByLoginAuteur", query = "SELECT a FROM Auteur a WHERE a.loginAuteur = :loginAuteur"),
+    @NamedQuery(name = "Auteur.findByPwdAuteur", query = "SELECT a FROM Auteur a WHERE a.pwdAuteur = :pwdAuteur")})
 public class Auteur implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @TableGenerator(name = "cleAuteur", table = "cles", pkColumnName = "id_cle", valueColumnName = "val_cle", pkColumnValue = "AUTEUR", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "cleAuteur")
     @NotNull
     @Column(name = "id_auteur")
     private Integer idAuteur;
@@ -159,5 +144,5 @@ public class Auteur implements Serializable {
     public String toString() {
         return "dal.Auteur[ idAuteur=" + idAuteur + " ]";
     }
-    
+
 }
