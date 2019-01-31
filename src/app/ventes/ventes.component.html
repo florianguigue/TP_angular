@@ -1,0 +1,21 @@
+<h2 class="col-md-offset-2">{{ title }}</h2>
+<table class="table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th>Titre</th>
+    <th>Droits perçus</th>
+    <th>Date d'achat</th>
+    <th>Résumé</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor='let vente of sells'>
+    <td>{{ vente.article.titre }}</td>
+    <td>{{ vente.article.prix | currency: 'EUR' }}</td>
+    <td>{{ vente.dateAchat | date }}</td>
+    <td><a [routerLink]="['/article', vente.article.idArticle]">Résumé</a></td>
+  </tr>
+  </tbody>
+</table>
+<span>Montant total des droits perçus : {{ montantTotal | currency: 'EUR' }}</span>
+<app-error [error]="error"></app-error>

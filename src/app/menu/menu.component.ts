@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../services/shared.service';
+import {Auteur} from '../models/auteur';
+import {Client} from '../models/client';
 
 @Component({
   selector: 'app-menu',
@@ -15,6 +17,10 @@ export class MenuComponent implements OnInit {
 
   logout() {
     this.sharedService.isConnected = false;
+    this.sharedService.setTypeCompte(undefined);
+    this.sharedService.setAuteur(new Auteur());
+    this.sharedService.setClient(new Client());
+    this.sharedService.setArticleAcheter([]);
   }
 
 }

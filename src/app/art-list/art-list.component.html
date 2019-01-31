@@ -1,0 +1,21 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Titre</th>
+      <th>Prix</th>
+      <th>Résumé</th>
+      <th>Panier</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let article of articles'>
+      <td>{{ article.idArticle }}</td>
+      <td>{{ article.titre }}</td>
+      <td>{{ article.prix | currency: 'EUR'}}</td>
+      <td><a [routerLink]="['/article', article.idArticle]">Résume</a></td>
+      <td><a (click)="addToBasket(article)">Panier</a></td>
+    </tr>
+  </tbody>
+</table>
+<app-error [error]="error"></app-error>

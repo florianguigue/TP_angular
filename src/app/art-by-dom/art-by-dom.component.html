@@ -1,0 +1,13 @@
+<div class="container">
+  <h2 class="col-md-offset-2">{{ title }}</h2>
+
+  <form class="form-horizontal" role="form" name="artByDomForm">
+    <div class="form-group">
+      <app-domain [idDomaine]="domaine_id" (onChoose)="domaineSelected($event)"></app-domain>
+    </div>
+  </form>
+  <div *ngIf="domaine_id > 0">
+    <app-art-list [articles]="articles"></app-art-list>
+  </div>
+  <app-error [error]="error"></app-error>
+</div>
