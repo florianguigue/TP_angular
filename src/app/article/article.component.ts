@@ -21,7 +21,7 @@ export class ArticleComponent implements OnInit {
   constructor(public articleService: ArticleService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private sharedService: SharedService) {
+              public sharedService: SharedService) {
   }
 
   ngOnInit() {

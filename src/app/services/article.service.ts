@@ -12,7 +12,7 @@ import {RedigePK} from '../models/redige-pk';
 })
 export class ArticleService {
 
-  private netArticlesUrl = 'http://localhost:8081/NetArticlesRest/webresources/webservice/';
+  private netArticlesUrl = 'http://localhost:8080/NetArticlesRest/webresources/webservice/';
 
   constructor(
     private httpClient: HttpClient,

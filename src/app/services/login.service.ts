@@ -7,7 +7,7 @@ import {Client} from '../models/client';
   providedIn: 'root'
 })
 export class LoginService {
-  private netArticlesUrl = 'http://localhost:8081/NetArticlesRest/webresources/webservice/';
+  private netArticlesUrl = 'http://localhost:8080/NetArticlesRest/webresources/webservice/';
 
   constructor(private httpClient: HttpClient) { }
 
