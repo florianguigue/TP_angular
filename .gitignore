@@ -33,6 +33,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+/NetArticlesRest
+/nbProject
+/src/fichiers
 
 # System Files
 .DS_Store
