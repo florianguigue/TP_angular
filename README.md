@@ -1,27 +1,45 @@
-# TP
+# TP Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
+Ce projet Github contient le code de l'application Angular ainsi que le dossier NetArticlesRest
+qui est l'API Rest en Java.
 
-## Development server
+## Démarrage du projet
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### SQL
 
-## Code scaffolding
+Pour démarrer le projet, allumer le serveur MySQL en local et créer la base de données avec le
+script SQL présent à la racine du projet (net_articles.sql).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### API Rest
 
-## Build
+Pour que l'API Rest se lance correctement sur un serveur GlassFish, il faut que dans le fichier de
+configuration persistence.xml, le nom de la datasource corresponde à la datasource du serveur GlassFish.
+L'API Rest a reçu des modifications qui sont essentielles au bon fonctionnement de notre projet.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Application angular
 
-## Running unit tests
+Avant le démarrage de l'application Angular, bien veiller à utiliser la commande `npm install` afin de
+télécharger toutes les dépendances nécessaires au fonctionnement de l'application.
+Pour l'apport technologique que nous expliquerons en dessous, nous avons mis en place un serveur nodeJS.
+Afin de démarrer l'application Angular et le serveur nodeJS facilement, nous avons modifié la commande
+`npm start`. C'est donc la commande a utiliser pour démarrer l'application.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Apport technologique
 
-## Running end-to-end tests
+L'apport technologique que nous avons décidé de mettre en place est un plugin angular d'upload de fichier.
+Le but de cet apport est de permettre aux auteurs d'ajouter eux-mêmes des oeuvres depuis l'application.
+Nous avons utilisé le plugin [ng2-file-upload](https://github.com/valor-software/ng2-file-upload) pour réaliser
+l'upload de nouvelles oeuvres. Via ce plugin, nous intégrons une directive d'input permettant de selectionner un
+fichier sur l'ordinateur.
+Cet input est intégrer dans le formulaire d'une page comprenant en plus les informations relatives à l'oeuvre,
+à savoir le titre, le résumé, le domaine et le prix. Une fois que toutes les informations sont remplies, la valdiation
+du formulaire va faire appel au serveur nodeJS pour upload le fichier.
+Etant donné que nous ne disposons pas de serveur de fichier, ceux-ci sont stocké en local dans le dossier /src/fichiers.
+C'est aussi pour cette raison qu'il est nécessaire de redémarrer l'application Angular si nous voulons récupérer
+le documents récemment uploadé car l'application charge le dossier de fichiers au démarrage. 
+L'idéal serait de pouvoir upload et stocké les fichiers sur un serveur de fichiers puis d'envoyer des 
+requêtes afin de récupérer les fichiers.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Crédits
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+L'application a été réalisé en groupe de 3 par Therence BRUNE, Florian GUIGUE et Aurélien TARDY.
